@@ -2,7 +2,7 @@
 # -- coding: UTF-8 --
 # Author   :WindAsMe
 # Date     :18-9-28 下午2:10
-# File     :depercated.py
+# File     :deprecated.py
 # Location:/Home/PycharmProjects/..
 import requests
 import base64

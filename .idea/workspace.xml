@@ -4,7 +4,7 @@
     <list default="true" id="f2869460-95bf-450e-85fc-dd900d9f0bc6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/include/crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/include/crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/include/valcode.png" beforeDir="false" afterPath="$PROJECT_DIR$/venv/include/valcode.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/include/depercated.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/include/deprecated.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,25 +14,20 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Crawler$crawler.coverage" NAME="crawler Coverage Results" MODIFIED="1538114901201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/include" />
+    <SUITE FILE_PATH="coverage/Crawler$crawler.coverage" NAME="crawler Coverage Results" MODIFIED="1538116948957" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/include" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="crawler.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/venv/include/crawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="85" column="4" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="4" />
+            <state relative-caret-position="-31">
+              <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
               <folding>
                 <element signature="e#149#164#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="valcode.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/include/valcode.png">
-          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -50,6 +45,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/venv/include/depercated.py" />
+        <option value="$PROJECT_DIR$/venv/include/deprecated.py" />
         <option value="$PROJECT_DIR$/venv/include/crawler.py" />
       </list>
     </option>
@@ -171,7 +168,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.14285715" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32142857" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32919255" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11286504" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -231,10 +228,20 @@
     <entry file="file://$PROJECT_DIR$/venv/include/valcode.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/venv/include/deprecated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+          <folding>
+            <element signature="e#153#168#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/venv/include/crawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="85" column="4" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="4" />
+        <state relative-caret-position="-31">
+          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
           <folding>
             <element signature="e#149#164#0" expanded="true" />
           </folding>
