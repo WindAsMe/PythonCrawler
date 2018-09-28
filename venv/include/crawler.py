@@ -4,20 +4,31 @@
 # Date     :18-9-26 上午8:13
 # File     :crawler.py
 # Location:/Home/PycharmProjects/..
-import xlwt
+import xlrd
 import requests
 import base64
+import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from time import sleep
+from queue import Queue
 
+# Save IPC.xlsx to stack
+# Facilitate the searching
 def read_xlsx():
-    list = []
+    ipc = Queue()
     workbook = xlrd.open_workbook('IPC.xlsx')
     booksheet = workbook.sheet_by_index(0)
-    i = 1
-    cell_21 = booksheet.cell_value(1, 0)
-    while booksheet.cell_value(i, 0) is not None:
+    row = 1
+    try:
+        while True:
+            ipc.put(booksheet.cell_value(row, 0))
+            row += 1
+    except IndexError:
+        # Do nothing
+        print('Data loading Success')
+    return ipc
+
 
 if __name__ == '__main__':
 
@@ -26,7 +37,7 @@ if __name__ == '__main__':
     # The correlative version can be found in
     # https://blog.csdn.net/weixin_42551465/article/details/80817552
 
-    stack = []
+    queue = read_xlsx()
 
     browser = webdriver.Chrome()
     # Input the username password and validation code
@@ -42,7 +53,7 @@ if __name__ == '__main__':
         log_in.click()
         sleep(3)
         print('step1: Success')
-    except e:
+    except IOError:
         print('step1: Failure')
 
     try:
@@ -50,7 +61,7 @@ if __name__ == '__main__':
         browser.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[2]/div[2]/div/div/div/div[3]/a/div').click()
         print('step2: Success')
         sleep(3)
-    except e:
+    except IOError:
         print('step2: Failure')
 
     try:
@@ -60,9 +71,23 @@ if __name__ == '__main__':
                 '/html/body/div[3]/div[2]/div/div[1]/div/div[2]/div/div[1]/ul/li[' + str(i) + ']/a').click()
         print('step3: Success')
         sleep(2)
-    except e:
+    except IOError:
         print('step3: Failure')
 
+    try:
+        # 4. Start to search
+        while not queue.empty():
+            browser.find_element_by_id("tableSearchItemIdIVDB045").send_keys(queue.get())
+            browser.find_element_by_xpath('/html/body/div[3]/div[3]/div/div[2]/div[3]/a[3]').click()
 
+        print('step4: Success')
+    except IOError:
+        print('step4: Failure')
+
+    final_data = pd.DataFrame(
+        columns=['APP_ID', 'APP_DATE', 'PUB_ID', 'PUB_DATE', 'IPC', 'APPLICANT', 'INVENTOR', 'PRI_ID', 'PRI_DATE',
+                 'APP_ADDRESS', 'APP_ZIPCODE', 'CPC_ID'])
+
+    fianl_data.to_csv('final_data.txt', index=True, encoding='utf-8')
     # browser.quit()
 
