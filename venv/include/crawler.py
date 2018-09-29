@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from time import sleep
 from queue import Queue
+from selenium.webdriver.common.keys import Keys
 
 # Save IPC.xlsx to stack
 # Facilitate the searching
@@ -104,7 +105,8 @@ if __name__ == '__main__':
                     print('this page has', items.__len__(), 'items')
                     while item < items.__len__():
                         button_path = '//*[@id="resultMode"]/div/div[1]/ul/li[' + str(item) + ']/div/div[3]/div/a[1]'
-                        browser.find_element_by_xpath(button_path).click()
+                        print(button_path)
+                        browser.find_element_by_xpath(button_path).send_keys(Keys.ENTER)
                         # Snatch the data
                         sleep(5)
                         item += 1
