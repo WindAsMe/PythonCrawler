@@ -2,35 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2869460-95bf-450e-85fc-dd900d9f0bc6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/zhongrui.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/zhongrui.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/include/crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/include/crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt-1.3.0.dist-info/DESCRIPTION.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt-1.3.0.dist-info/INSTALLER" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt-1.3.0.dist-info/METADATA" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt-1.3.0.dist-info/RECORD" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt-1.3.0.dist-info/WHEEL" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt-1.3.0.dist-info/metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt-1.3.0.dist-info/top_level.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/BIFFRecords.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/Bitmap.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/Cell.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/Column.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/CompoundDoc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/ExcelFormula.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/ExcelFormulaLexer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/ExcelFormulaParser.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/ExcelMagic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/Formatting.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/Row.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/Style.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/UnicodeUtils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/Utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/Workbook.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/Worksheet.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/antlr.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/compat.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/xlwt/excel-formula.g" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,15 +14,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Crawler$crawler.coverage" NAME="crawler Coverage Results" MODIFIED="1538119833995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/include" />
+    <SUITE FILE_PATH="coverage/Crawler$crawler.coverage" NAME="crawler Coverage Results" MODIFIED="1538190546693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/include" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="crawler.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/venv/include/crawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
+            <state relative-caret-position="255">
+              <caret line="104" column="68" selection-start-line="104" selection-start-column="68" selection-end-line="104" selection-end-column="68" />
               <folding>
                 <element signature="e#149#160#0" expanded="true" />
               </folding>
@@ -87,9 +61,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="262" />
-    <option name="y" value="9" />
-    <option name="width" value="797" />
+    <option name="x" value="468" />
+    <option name="y" value="56" />
+    <option name="width" value="761" />
     <option name="height" value="732" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -187,14 +161,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="-6" width="1309" height="774" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32919255" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32142857" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31987578" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32919255" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16811365" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -273,8 +246,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/include/crawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
+        <state relative-caret-position="255">
+          <caret line="104" column="68" selection-start-line="104" selection-start-column="68" selection-end-line="104" selection-end-column="68" />
           <folding>
             <element signature="e#149#160#0" expanded="true" />
           </folding>

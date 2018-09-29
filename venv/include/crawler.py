@@ -30,8 +30,16 @@ def read_xlsx():
     return ipc
 
 
-if __name__ == '__main__':
+# trim the uncertain str to int
+def trim(string):
+    s = ''
+    for c in string:
+        if '0' <= c <= '9':
+            s += c
+    return int(s)
 
+
+if __name__ == '__main__':
     # Google Browser is needed
     # ChromeDriver is also needed
     # The correlative version can be found in
@@ -53,7 +61,7 @@ if __name__ == '__main__':
         log_in.click()
         sleep(3)
         print('step1: Success')
-    except IOError:
+    except BaseException:
         print('step1: Failure')
 
     try:
@@ -61,7 +69,7 @@ if __name__ == '__main__':
         browser.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[2]/div[2]/div/div/div/div[3]/a/div').click()
         print('step2: Success')
         sleep(3)
-    except IOError:
+    except BaseException:
         print('step2: Failure')
 
     try:
@@ -71,23 +79,50 @@ if __name__ == '__main__':
                 '/html/body/div[3]/div[2]/div/div[1]/div/div[2]/div/div[1]/ul/li[' + str(i) + ']/a').click()
         print('step3: Success')
         sleep(2)
-    except IOError:
+    except BaseException:
         print('step3: Failure')
 
     try:
         # 4. Start to search
+        # Structure is prefer to the function
+        # Save the window handle
+        handle = browser.current_window_handle
         while not queue.empty():
-            browser.find_element_by_id("tableSearchItemIdIVDB045").send_keys(queue.get())
-            browser.find_element_by_xpath('/html/body/div[3]/div[3]/div/div[2]/div[3]/a[3]').click()
+            try:
+                IPC = queue.get()
+                print("IPC: ", IPC)
+                browser.find_element_by_id("tableSearchItemIdIVDB045").send_keys(IPC)
+                browser.find_element_by_xpath('/html/body/div[3]/div[3]/div/div[2]/div[3]/a[3]').click()
 
+                # Starting outset crawler
+                page_before = browser.find_element_by_xpath('//*[@id="resultMode"]/div/div[2]/div/div/div/div/p[1]').text
+                print(trim(page_before))
+                page = trim(page_before)
+                for page in range(1, page + 1):
+                    item = 1
+                    items = browser.find_elements_by_xpath('//*[@id="resultMode"]/div/div[1]/ul/li')
+                    print('this page has', items.__len__(), 'items')
+                    while item < items.__len__():
+                        button_path = '//*[@id="resultMode"]/div/div[1]/ul/li[' + str(item) + ']/div/div[3]/div/a[1]'
+                        browser.find_element_by_xpath(button_path).click()
+                        # Snatch the data
+                        sleep(5)
+                        item += 1
+
+
+            # Ignore this Exception
+            except BaseException:
+                # Do nothing
+                sleep(10)
+            browser.find_element_by_id("tableSearchItemIdIVDB045").clear()
         print('step4: Success')
-    except IOError:
+    except BaseException:
         print('step4: Failure')
 
     final_data = pd.DataFrame(
         columns=['APP_ID', 'APP_DATE', 'PUB_ID', 'PUB_DATE', 'IPC', 'APPLICANT', 'INVENTOR', 'PRI_ID', 'PRI_DATE',
                  'APP_ADDRESS', 'APP_ZIPCODE', 'CPC_ID'])
 
-    fianl_data.to_csv('final_data.txt', index=True, encoding='utf-8')
+    #fianl_data.to_csv('final_data.txt', index=True, encoding='utf-8')
     # browser.quit()
 
