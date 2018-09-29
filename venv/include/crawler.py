@@ -11,6 +11,8 @@ import requests
 import base64
 import pandas as pd
 from bs4 import BeautifulSoup
+# selenium is time susceptible
+# It's also the weakness of Python
 from selenium import webdriver
 from time import sleep
 from queue import Queue
@@ -123,7 +125,7 @@ if __name__ == '__main__':
     browser.find_element_by_id('j_username').send_keys('m451024822')
     browser.find_element_by_id('j_password_show').send_keys('m451024822')
     browser.find_element_by_id('j_validation_code').send_keys(input('valid code: '))
-
+    sleep(3)
     # All Exception can be delete
     try:
         # 1. Press the login button
@@ -136,8 +138,8 @@ if __name__ == '__main__':
     try:
         # 2. Press the "高级搜索"
         browser.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div[2]/div[2]/div/div/div/div[3]/a/div').click()
-        print('step2: Success')
         sleep(3)
+        print('step2: Success')
     except BaseException:
         print('step2: Failure')
 
@@ -146,6 +148,7 @@ if __name__ == '__main__':
         for i in range(1, 7, 2) :
             browser.find_element_by_xpath(
                 '/html/body/div[3]/div[2]/div/div[1]/div/div[2]/div/div[1]/ul/li[' + str(i) + ']/a').click()
+            sleep(3)
         print('step3: Success')
         sleep(2)
     except BaseException:
@@ -161,10 +164,11 @@ if __name__ == '__main__':
                 print("IPC: ", IPC)
                 browser.find_element_by_id("tableSearchItemIdIVDB045").send_keys(IPC)
                 browser.find_element_by_xpath('/html/body/div[3]/div[3]/div/div[2]/div[3]/a[3]').click()
+                # Sleep is necessary
+                # For the first loading
                 sleep(5)
                 # Starting outset crawler
                 page_before = browser.find_element_by_xpath('//*[@id="resultMode"]/div/div[2]/div/div/div/div/p[1]').text
-                print('page: ', trim(page_before))
                 # For certain IPC in different page
                 page = trim(page_before)
                 for current in range(1, page + 1):
@@ -182,50 +186,50 @@ if __name__ == '__main__':
                         print(button_path)
                         sub = browser.find_element_by_xpath(button_path)
                         sub.send_keys(Keys.ENTER)
-                        print('click!')
                         sleep(5)
                         # Snatch the data
                         handles = browser.window_handles
-                        print('handles:', handles.__str__())
                         for handle in handles:
                             if handle != main_handle:
                                 browser.switch_to.window(handle)
-
                                 content = browser.page_source
                                 content.encode('utf-8')
                                 # print(content)
                                 pattern = re.compile('</div.*?second-td"><div>(.*?)</div.*?tr>', re.S)
                                 items = re.findall(pattern, content)
                                 print('items:', items.__str__())
-                                # list1.append(items[0])
-                                # list2.append(items[1])
-                                # list3.append(items[2])
-                                # list4.append(items[3])
-                                # list5.append(items[4])
-                                # list6.append(items[5])
-                                # list7.append(items[6])
-                                # list8.append(items[7])
-                                # list9.append(items[8])
-                                # list10.append(items[9])
-                                # list11.append(items[10])
-                                # list12.append(items[11])
+                                list1.append(items[0])
+                                list2.append(items[1])
+                                list3.append(items[2])
+                                list4.append(items[3])
+                                list5.append(items[4])
+                                list6.append(items[5])
+                                list7.append(items[6])
+                                list8.append(items[7])
+                                list9.append(items[8])
+                                list10.append(items[9])
+                                list11.append(items[10])
+                                list12.append(items[11])
 
+                                # Sleep is necessary
                                 sleep(2)
                                 browser.close()
                                 browser.switch_to.window(main_handle)
                         item += 1
-                    # save_data(list1, list2, list3, list4, list5, list6, list7,
-                    #           list8, list9, list10, list11, list12)
-                    sleep(2)
+                    # Saving in the scale of page
+                    print('save')
+                    save_data(list1, list2, list3, list4, list5, list6, list7,
+                              list8, list9, list10, list11, list12)
                     current += 1
                     browser.find_element_by_xpath('//*[@id="resultMode"]/div/div[2]/div/div/div/div/a[6]').send_keys(Keys.ENTER)
-                    print('next page')
+                    sleep(3)
+                    print('next Page')
             # Ignore this Exception
             except BaseException:
                 print('read Error')
                 # Do nothing
-                sleep(10)
             browser.find_element_by_id("tableSearchItemIdIVDB045").clear()
+            sleep(2)
         print('step4: Success')
     except BaseException:
         print('step4: Failure')
