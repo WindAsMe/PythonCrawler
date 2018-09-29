@@ -17,6 +17,8 @@ from selenium import webdriver
 from time import sleep
 from queue import Queue
 from selenium.webdriver.common.keys import Keys
+from xlutils.copy import copy
+
 
 '''
 This code can be found in https://github.com/WindAsMe/PythonCrawler
@@ -59,11 +61,15 @@ row = 1
 def save_data(list1, list2, list3, list4,
     list5, list6, list7, list8, list9,
     list10, list11, list12):
-    workbook = xlwt.Workbook()
-    sheet = workbook.get_sheet(u'sheet1')
+    # Read-only
+    workbook = xlrd.open_workbook('data.xls')
+    workbook_copy = copy(workbook)
+    sheet = workbook_copy.get_sheet(0)
+
     try:
-        i = row
-        while row < i + list1.__len__():
+        global row
+        i = 0
+        while i < len(list1):
             sheet.write(row, 0, list1[i])
             sheet.write(row, 1, list2[i])
             sheet.write(row, 2, list3[i])
@@ -76,10 +82,11 @@ def save_data(list1, list2, list3, list4,
             sheet.write(row, 9, list10[i])
             sheet.write(row, 10, list11[i])
             sheet.write(row, 11, list12[i])
+            i += 1
             row += 1
     except BaseException:
         print('save Error')
-    workbook.save("data.xls")
+    workbook_copy.save("data.xls")
 
 
 # Init the Excel
@@ -184,8 +191,7 @@ if __name__ == '__main__':
                         # //*[@id="resultMode"]/div/div[1]/ul/li[12]/div/div[3]/div/a[1]
                         button_path = '//*[@id="resultMode"]/div/div[1]/ul/li[' + str(item) + ']/div/div[3]/div/a[1]'
                         print(button_path)
-                        sub = browser.find_element_by_xpath(button_path)
-                        sub.send_keys(Keys.ENTER)
+                        browser.find_element_by_xpath(button_path).send_keys(Keys.ENTER)
                         sleep(5)
                         # Snatch the data
                         handles = browser.window_handles
@@ -197,6 +203,7 @@ if __name__ == '__main__':
                                 # print(content)
                                 pattern = re.compile('</div.*?second-td"><div>(.*?)</div.*?tr>', re.S)
                                 items = re.findall(pattern, content)
+                                sleep(5)
                                 print('items:', items.__str__())
                                 list1.append(items[0])
                                 list2.append(items[1])
@@ -220,6 +227,20 @@ if __name__ == '__main__':
                     print('save')
                     save_data(list1, list2, list3, list4, list5, list6, list7,
                               list8, list9, list10, list11, list12)
+
+                    # init the list
+                    list1 = []
+                    list2 = []
+                    list3 = []
+                    list4 = []
+                    list5 = []
+                    list6 = []
+                    list7 = []
+                    list8 = []
+                    list9 = []
+                    list10 = []
+                    list11 = []
+                    list12 = []
                     current += 1
                     browser.find_element_by_xpath('//*[@id="resultMode"]/div/div[2]/div/div/div/div/a[6]').send_keys(Keys.ENTER)
                     sleep(3)
@@ -234,5 +255,5 @@ if __name__ == '__main__':
     except BaseException:
         print('step4: Failure')
 
-    # browser.quit()
+    browser.quit()
 
