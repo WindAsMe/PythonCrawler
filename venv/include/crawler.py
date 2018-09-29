@@ -53,28 +53,28 @@ def trim(string):
 
 # Save data in form of Excel
 # Global variance
-row = 2
+row = 1
 def save_data(list1, list2, list3, list4,
     list5, list6, list7, list8, list9,
     list10, list11, list12):
     workbook = xlwt.Workbook()
     sheet = workbook.get_sheet(u'sheet1')
     try:
-        i = 0
-        while row < row + list1.__len__():
-            sheet.write(row, 1, list1[i])
-            sheet.write(row, 2, list2[i])
-            sheet.write(row, 3, list3[i])
-            sheet.write(row, 4, list4[i])
-            sheet.write(row, 5, list5[i])
-            sheet.write(row, 6, list6[i])
-            sheet.write(row, 7, list7[i])
-            sheet.write(row, 8, list8[i])
-            sheet.write(row, 9, list9[i])
-            sheet.write(row, 10, list10[i])
-            sheet.write(row, 11, list11[i])
-            sheet.write(row, 12, list12[i])
-            i += 1
+        i = row
+        while row < i + list1.__len__():
+            sheet.write(row, 0, list1[i])
+            sheet.write(row, 1, list2[i])
+            sheet.write(row, 2, list3[i])
+            sheet.write(row, 3, list4[i])
+            sheet.write(row, 4, list5[i])
+            sheet.write(row, 5, list6[i])
+            sheet.write(row, 6, list7[i])
+            sheet.write(row, 7, list8[i])
+            sheet.write(row, 8, list9[i])
+            sheet.write(row, 9, list10[i])
+            sheet.write(row, 10, list11[i])
+            sheet.write(row, 11, list12[i])
+            row += 1
     except BaseException:
         print('save Error')
     workbook.save("data.xls")
@@ -84,18 +84,18 @@ def save_data(list1, list2, list3, list4,
 def init_excel():
     workbook = xlwt.Workbook()
     sheet = workbook.add_sheet(u'sheet1', cell_overwrite_ok=True)
-    sheet.write(1, 1, '申请号')
-    sheet.write(1, 2, '申请日')
-    sheet.write(1, 3, '公开(公告)号')
-    sheet.write(1, 4, '公开(公告)日')
-    sheet.write(1, 5, 'IPC分类号')
-    sheet.write(1, 6, '申请（专利权）人')
-    sheet.write(1, 7, '发明人')
-    sheet.write(1, 8, '优先权号')
-    sheet.write(1, 9, '优先权日')
-    sheet.write(1, 10, '申请人地址')
-    sheet.write(1, 11, '申请人邮编')
-    sheet.write(1, 12, 'CPC分类号')
+    sheet.write(0, 0, '申请号')
+    sheet.write(0, 1, '申请日')
+    sheet.write(0, 2, '公开(公告)号')
+    sheet.write(0, 3, '公开(公告)日')
+    sheet.write(0, 4, 'IPC分类号')
+    sheet.write(0, 5, '申请（专利权）人')
+    sheet.write(0, 6, '发明人')
+    sheet.write(0, 7, '优先权号')
+    sheet.write(0, 8, '优先权日')
+    sheet.write(0, 9, '申请人地址')
+    sheet.write(0, 10, '申请人邮编')
+    sheet.write(0, 11, 'CPC分类号')
     workbook.save("data.xls")
 
 
@@ -127,8 +127,7 @@ if __name__ == '__main__':
     # All Exception can be delete
     try:
         # 1. Press the login button
-        log_in = browser.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[3]/div[2]/div[2]/div/a[1]')
-        log_in.click()
+        browser.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[3]/div[2]/div[2]/div/a[1]').click()
         sleep(3)
         print('step1: Success')
     except BaseException:
@@ -156,27 +155,35 @@ if __name__ == '__main__':
         # 4. Start to search
         # Structure is prefer to the function
         # Save the window handle
-        main_handle = browser.current_window_handle
         while not queue.empty():
             try:
                 IPC = queue.get()
                 print("IPC: ", IPC)
                 browser.find_element_by_id("tableSearchItemIdIVDB045").send_keys(IPC)
                 browser.find_element_by_xpath('/html/body/div[3]/div[3]/div/div[2]/div[3]/a[3]').click()
-
+                sleep(5)
                 # Starting outset crawler
                 page_before = browser.find_element_by_xpath('//*[@id="resultMode"]/div/div[2]/div/div/div/div/p[1]').text
                 print('page: ', trim(page_before))
+                # For certain IPC in different page
                 page = trim(page_before)
-                for page in range(1, page + 1):
+                for current in range(1, page + 1):
                     item = 1
                     items = browser.find_elements_by_xpath('//*[@id="resultMode"]/div/div[1]/ul/li')
-                    print('this page has', items.__len__(), 'items')
-                    while item < items.__len__():
+                    main_handle = browser.current_window_handle
+                    # For certain page in different thesis
+                    while item <= items.__len__():
+                        # For some representative xpath:
+                        # //*[@id="resultMode"]/div/div[1]/ul/li[1]/div/div[3]/div/a[1]
+                        # //*[@id="resultMode"]/div/div[1]/ul/li[3]/div/div[3]/div/a[1]
+                        # //*[@id="resultMode"]/div/div[1]/ul/li[9]/div/div[3]/div/a[1]
+                        # //*[@id="resultMode"]/div/div[1]/ul/li[12]/div/div[3]/div/a[1]
                         button_path = '//*[@id="resultMode"]/div/div[1]/ul/li[' + str(item) + ']/div/div[3]/div/a[1]'
-                        browser.find_element_by_xpath(button_path).send_keys(Keys.ENTER)
+                        print(button_path)
+                        sub = browser.find_element_by_xpath(button_path)
+                        sub.send_keys(Keys.ENTER)
                         print('click!')
-                        sleep(2)
+                        sleep(5)
                         # Snatch the data
                         handles = browser.window_handles
                         print('handles:', handles.__str__())
@@ -189,28 +196,33 @@ if __name__ == '__main__':
                                 # print(content)
                                 pattern = re.compile('</div.*?second-td"><div>(.*?)</div.*?tr>', re.S)
                                 items = re.findall(pattern, content)
-                                list1.append(items[0])
-                                list2.append(items[1])
-                                list3.append(items[2])
-                                list4.append(items[3])
-                                list5.append(items[4])
-                                list6.append(items[5])
-                                list7.append(items[6])
-                                list8.append(items[7])
-                                list9.append(items[8])
-                                list10.append(items[9])
-                                list11.append(items[10])
-                                list12.append(items[11])
+                                print('items:', items.__str__())
+                                # list1.append(items[0])
+                                # list2.append(items[1])
+                                # list3.append(items[2])
+                                # list4.append(items[3])
+                                # list5.append(items[4])
+                                # list6.append(items[5])
+                                # list7.append(items[6])
+                                # list8.append(items[7])
+                                # list9.append(items[8])
+                                # list10.append(items[9])
+                                # list11.append(items[10])
+                                # list12.append(items[11])
 
                                 sleep(2)
                                 browser.close()
                                 browser.switch_to.window(main_handle)
                         item += 1
-                    save_data(list1, list2, list3, list4, list5, list6, list7,
-                              list8, list9, list10, list11, list12)
+                    # save_data(list1, list2, list3, list4, list5, list6, list7,
+                    #           list8, list9, list10, list11, list12)
                     sleep(2)
+                    current += 1
+                    browser.find_element_by_xpath('//*[@id="resultMode"]/div/div[2]/div/div/div/div/a[6]').send_keys(Keys.ENTER)
+                    print('next page')
             # Ignore this Exception
             except BaseException:
+                print('read Error')
                 # Do nothing
                 sleep(10)
             browser.find_element_by_id("tableSearchItemIdIVDB045").clear()
