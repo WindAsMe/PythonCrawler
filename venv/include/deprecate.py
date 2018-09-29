@@ -1,6 +1,12 @@
 # !/usr/bin/python3
 # -- coding: UTF-8 --
 # Author   :WindAsMe
+# Date     :18-9-29 下午6:50
+# File     :deprecate.py
+# Location:/Home/PycharmProjects/..
+# !/usr/bin/python3
+# -- coding: UTF-8 --
+# Author   :WindAsMe
 # Date     :18-9-28 下午2:10
 # File     :deprecated.py
 # Location:/Home/PycharmProjects/..
