@@ -4,6 +4,7 @@
 # Date     :18-9-26 上午8:13
 # File     :crawler.py
 # Location:/Home/PycharmProjects/..
+import re
 import xlwt
 import xlrd
 import requests
@@ -53,11 +54,11 @@ def trim(string):
 # Save data in form of Excel
 # Global variance
 row = 2
-def save_data(list1 = [], list2 = [], list3 = [], list4 = [],
-    list5 = [], list6 = [], list7 = [], list8 = [], list9 = [],
-    list10 = [], list11 = [], list12 = []):
+def save_data(list1, list2, list3, list4,
+    list5, list6, list7, list8, list9,
+    list10, list11, list12):
     workbook = xlwt.Workbook()
-    sheet = workbook.add_sheet(u'sheet1', cell_overwrite_ok=True)
+    sheet = workbook.get_sheet(u'sheet1')
     try:
         i = 0
         while row < row + list1.__len__():
@@ -79,10 +80,30 @@ def save_data(list1 = [], list2 = [], list3 = [], list4 = [],
     workbook.save("data.xls")
 
 
+# Init the Excel
+def init_excel():
+    workbook = xlwt.Workbook()
+    sheet = workbook.add_sheet(u'sheet1', cell_overwrite_ok=True)
+    sheet.write(1, 1, '申请号')
+    sheet.write(1, 2, '申请日')
+    sheet.write(1, 3, '公开(公告)号')
+    sheet.write(1, 4, '公开(公告)日')
+    sheet.write(1, 5, 'IPC分类号')
+    sheet.write(1, 6, '申请（专利权）人')
+    sheet.write(1, 7, '发明人')
+    sheet.write(1, 8, '优先权号')
+    sheet.write(1, 9, '优先权日')
+    sheet.write(1, 10, '申请人地址')
+    sheet.write(1, 11, '申请人邮编')
+    sheet.write(1, 12, 'CPC分类号')
+    workbook.save("data.xls")
+
+
 # Programme Interface
 if __name__ == '__main__':
 
     queue = read_xlsx()
+    init_excel()
 
     list1 = []
     list2 = []
@@ -135,7 +156,7 @@ if __name__ == '__main__':
         # 4. Start to search
         # Structure is prefer to the function
         # Save the window handle
-        handle = browser.current_window_handle
+        main_handle = browser.current_window_handle
         while not queue.empty():
             try:
                 IPC = queue.get()
@@ -145,7 +166,7 @@ if __name__ == '__main__':
 
                 # Starting outset crawler
                 page_before = browser.find_element_by_xpath('//*[@id="resultMode"]/div/div[2]/div/div/div/div/p[1]').text
-                print(trim(page_before))
+                print('page: ', trim(page_before))
                 page = trim(page_before)
                 for page in range(1, page + 1):
                     item = 1
@@ -153,59 +174,41 @@ if __name__ == '__main__':
                     print('this page has', items.__len__(), 'items')
                     while item < items.__len__():
                         button_path = '//*[@id="resultMode"]/div/div[1]/ul/li[' + str(item) + ']/div/div[3]/div/a[1]'
-                        print(button_path)
                         browser.find_element_by_xpath(button_path).send_keys(Keys.ENTER)
+                        print('click!')
+                        sleep(2)
                         # Snatch the data
-                        list1.append(browser.find_element_by_xpath('//*[@id="tabContent_1_id"]/div/div[4]').text)
-                        list2.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[1]/td[1]').text
-                                     + ": " + browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[1]/td[2]').text)
-                        list3.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[2]/td[1]').text
-                                     + ": " + browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[2]/td[1]').text)
-                        list4.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[3]/td[1]').text
-                                     + ": " + browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[3]/td[1]').text)
-                        list5.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[4]/td[1]').text
-                                     + ": " + browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[4]/td[1]').text)
-                        list6.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[5]/td[1]').text
-                                     + ": " + browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[5]/td[1]').text)
-                        list7.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[6]/td[1]').text
-                                     + ": " + browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[6]/td[1]').text)
-                        list8.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[7]/td[1]').text
-                                     + ": " + browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[7]/td[1]').text)
-                        list9.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[8]/td[1]').text
-                                     + ": " + browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[8]/td[1]').text)
-                        list10.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[9]/td[1]').text
-                                     + ": " + browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[9]/td[1]').text)
-                        list11.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[10]/td[1]').text
-                                     + ": " + browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[5]/table/tbody/tr[10]/td[1]').text)
-                        list12.append(browser.find_element_by_xpath(
-                            '//*[@id="tabContent_1_id"]/div/div[3]/div[1]/div[1]/h1').text
-                                      + ": " + browser.find_element_by_xpath(
-                            '//*[@id="sipoabs_content_0"]').text)
-                        sleep(5)
+                        handles = browser.window_handles
+                        print('handles:', handles.__str__())
+                        for handle in handles:
+                            if handle != main_handle:
+                                browser.switch_to.window(handle)
+
+                                content = browser.page_source
+                                content.encode('utf-8')
+                                # print(content)
+                                pattern = re.compile('</div.*?second-td"><div>(.*?)</div.*?tr>', re.S)
+                                items = re.findall(pattern, content)
+                                list1.append(items[0])
+                                list2.append(items[1])
+                                list3.append(items[2])
+                                list4.append(items[3])
+                                list5.append(items[4])
+                                list6.append(items[5])
+                                list7.append(items[6])
+                                list8.append(items[7])
+                                list9.append(items[8])
+                                list10.append(items[9])
+                                list11.append(items[10])
+                                list12.append(items[11])
+
+                                sleep(2)
+                                browser.close()
+                                browser.switch_to.window(main_handle)
                         item += 1
                     save_data(list1, list2, list3, list4, list5, list6, list7,
                               list8, list9, list10, list11, list12)
-
+                    sleep(2)
             # Ignore this Exception
             except BaseException:
                 # Do nothing
@@ -214,10 +217,6 @@ if __name__ == '__main__':
         print('step4: Success')
     except BaseException:
         print('step4: Failure')
-
-    final_data = pd.DataFrame(
-        columns=['APP_ID', 'APP_DATE', 'PUB_ID', 'PUB_DATE', 'IPC', 'APPLICANT', 'INVENTOR', 'PRI_ID', 'PRI_DATE',
-                 'APP_ADDRESS', 'APP_ZIPCODE', 'CPC_ID'])
 
     # browser.quit()
 
